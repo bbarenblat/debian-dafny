@@ -1,0 +1,26 @@
+Source: dafny
+Section: devel
+Priority: extra
+Maintainer: Benjamin Barenblat <bbaren@mit.edu>
+Build-Depends:
+ debhelper (>= 9)
+Build-Depends-Indep:
+ cli-common-dev (>= 0.8),
+ libboogie-cil,
+ mono-devel (>= 2.4.2.3)
+Standards-Version: 3.9.6
+Homepage: http://research.microsoft.com/en-us/projects/dafny/
+
+Package: dafny
+Architecture: all
+Depends:
+ mono-mcs,
+ z3,
+ ${cli:Depends},
+ ${misc:Depends}
+Built-Using: libboogie-cil (= 2.3.0.61016+1.gbp97628c-1)
+Description: programming language with program correctness verifier
+ Dafny is a programming language with a program verifier.  The verifier
+ processes function preconditions, postconditions, and assertions, and sends
+ them to an SMT solver for checking.  In this way, assertion failures become
+ compiler errors, rather than runtime ones.

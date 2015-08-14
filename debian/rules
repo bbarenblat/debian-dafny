@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh $@ --with cli
+
+.PHONY: override_dh_auto_build
+override_dh_auto_build:
+	cp -a /usr/lib/boogie/* Binaries
+	mkdir -p Source/Dafny/bin/Checked
+	cp -a /usr/lib/boogie/* Source/Dafny/bin/Checked
+	xbuild Source/Dafny.sln
