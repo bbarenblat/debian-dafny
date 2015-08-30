@@ -1,5 +1,5 @@
-dafny (1.9.5-1) experimental; urgency=medium
+dafny (1.9.5-1) unstable; urgency=medium
 
   * Initial release.
 
- -- Benjamin Barenblat <bbaren@mit.edu>  Fri, 14 Aug 2015 18:35:20 -0400
+ -- Benjamin Barenblat <bbaren@mit.edu>  Sun, 30 Aug 2015 16:28:23 -0400
