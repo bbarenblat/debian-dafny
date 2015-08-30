@@ -18,7 +18,6 @@ Depends:
  z3,
  ${cli:Depends},
  ${misc:Depends}
-Built-Using: libboogie-cil (= 2.3.0.61016+1.gbp97628c-1)
 Description: programming language with program correctness verifier
  Dafny is a programming language with a program verifier.  The verifier
  processes function preconditions, postconditions, and assertions, and sends
