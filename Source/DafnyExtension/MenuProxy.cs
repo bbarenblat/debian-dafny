@@ -33,6 +33,14 @@ namespace DafnyLanguage
              && 0 < DafnyDriver.IncrementalVerificationMode();
     }
 
+    public bool ToggleAutomaticInduction(IWpfTextView activeTextView) {
+      return DafnyDriver.ChangeAutomaticInduction();
+    }
+
+    public bool AutomaticInductionCommandEnabled(IWpfTextView activeTextView) {
+      return activeTextView != null;
+    }
+
     public bool StopVerifierCommandEnabled(IWpfTextView activeTextView)
     {
       DafnyLanguage.ProgressTagger tagger;
@@ -67,6 +75,15 @@ namespace DafnyLanguage
       }
     }
 
+    public void DiagnoseTimeouts(IWpfTextView activeTextView)
+    {
+      DafnyLanguage.ProgressTagger tagger;
+      if (activeTextView != null && DafnyLanguage.ProgressTagger.ProgressTaggers.TryGetValue(activeTextView.TextBuffer, out tagger))
+      {
+        tagger.StartVerification(false, true);
+      }
+    }
+
     public bool MenuEnabled(IWpfTextView activeTextView)
     {
       return activeTextView != null && activeTextView.TextBuffer.ContentType.DisplayName == "dafny";
@@ -78,6 +95,14 @@ namespace DafnyLanguage
       return activeTextView != null
                     && DafnyLanguage.ResolverTagger.ResolverTaggers.TryGetValue(activeTextView.TextBuffer, out resolver)
                     && resolver.Program != null;
+    }
+
+    public bool DiagnoseTimeoutsCommandEnabled(IWpfTextView activeTextView)
+    {
+      ResolverTagger resolver;
+      return activeTextView != null
+                    && DafnyLanguage.ResolverTagger.ResolverTaggers.TryGetValue(activeTextView.TextBuffer, out resolver)
+                    && resolver.VerificationErrors.Any(err => err.Message.Contains("timed out"));
     }
 
     public void Compile(IWpfTextView activeTextView)
