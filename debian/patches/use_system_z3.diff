@@ -1,0 +1,38 @@
+Description: Use system Z3
+ Dafny by default looks for its vendored Z3.  Modify it to look for the system
+ Z3 installation instead.
+Forwarded: not-needed
+Author: Benjamin Barenblat <bbaren@mit.edu>
+--- a/Source/Dafny/DafnyOptions.cs
++++ b/Source/Dafny/DafnyOptions.cs
+@@ -283,29 +283,7 @@ namespace Microsoft.Dafny
+     /// so we vendor a Windows version.
+     /// </summary>
+     private void SetZ3ExecutableName() {
+-      var platform = (int)System.Environment.OSVersion.Platform;
+-
+-      // http://www.mono-project.com/docs/faq/technical/
+-      var isUnix = platform == 4 || platform == 128;
+-      
+-      var z3binName = isUnix ? "z3" : "z3.exe";
+-      var dafnyBinDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+-      var z3BinDir = System.IO.Path.Combine(dafnyBinDir, "z3", "bin");
+-      var z3BinPath = System.IO.Path.Combine(z3BinDir, z3binName);
+-
+-      if (!System.IO.File.Exists(z3BinPath) && !isUnix) {
+-        // This is most likely a Windows user running from source without downloading z3 
+-        // separately; this is ok, since we vendor z3.exe.
+-        z3BinPath = System.IO.Path.Combine(dafnyBinDir, z3binName);
+-      }
+-      
+-      if (!System.IO.File.Exists(z3BinPath) && errorReporter != null) {
+-        var tok = new Bpl.Token(1, 1) { filename = "*** " };
+-        errorReporter.Warning(MessageSource.Other, tok, "Could not find '{0}' in '{1}'.{2}Downloading and extracting a Z3 distribution to Dafny's 'Binaries' folder would solve this issue; for now, we'll rely on Boogie to find Z3.", 
+-          z3binName, z3BinDir, System.Environment.NewLine);
+-      } else {
+-        Z3ExecutablePath = z3BinPath;
+-      }
++      Z3ExecutablePath = "/usr/bin/z3";
+     }
+ 
+     public override void Usage() {

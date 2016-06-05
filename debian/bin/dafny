@@ -1,2 +1,2 @@
 #!/bin/sh
-exec /usr/bin/cli /usr/lib/dafny/Dafny.exe /z3exe:/usr/bin/z3 "$@"
+exec /usr/bin/cli /usr/lib/dafny/Dafny.exe "$@"
