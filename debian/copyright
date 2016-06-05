@@ -12,6 +12,10 @@ Files: Binaries/z3.exe
 Copyright: 2006-2014 Microsoft Corporation
 License: Expat
 
+Files: Docs/DafnyRef/css.sty
+Copyright: 2013 Microsoft Corporation
+License: Apache-2.0
+
 Files: debian/*
 Copyright: 2015 Benjamin Barenblat <bbaren@mit.edu>
 License: Apache-2.0
